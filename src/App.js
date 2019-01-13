@@ -26,8 +26,15 @@ class App extends Component {
   }
 
   render() {
-    let views = <div>Loading..{JSON.stringify(this.state.stories)}.</div>
-
+    let views = <div>Loading...</div>
+    const {stories} = this.state;
+    if(stories && stories.length > 0) {
+      views = stories.map(s => (
+        <p key={s.id}>
+          <a href={s.url}>{s.title}</a> from <strong>{s.by}</strong>
+        </p>
+      ))
+    }
     return (
       <div className="App">
         <h2>Hacker News Top Stories</h2>
